@@ -1,13 +1,18 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/OpenGL.hpp>
+#include <SFML/Audio/Music.hpp>
 #include <iostream>
 #include <sstream>
 #include "player.h"
 #include "window.h"
 
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1200,800), "Kraina Czarow"); //Okno programu
+
 
     //Postac
     sf::Texture txt;
@@ -21,6 +26,12 @@ int main()
     sf::Clock dt; //Czas
 
     window.setFramerateLimit(120); //120 fps , klatki na sekunde
+
+    //Muzyka
+    sf::Music music;
+    if (!music.openFromFile("Muzyka/Winds_Of_Stories.ogg"))
+        return -1; // blad
+    music.play();
 
     //Petla gry
     while(window.isOpen())
