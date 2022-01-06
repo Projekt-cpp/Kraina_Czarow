@@ -1,6 +1,7 @@
 #include "tile.h"
 #include "window.h"
 #include "player.h"
+#include "menu.h"
 
 std::vector<std::vector<sf::Vector2i> > mapa;
 std::vector<sf::Vector2i> tempMap;
@@ -19,7 +20,7 @@ void Tile::loadMap(const char *filename)
         openfile>>tileLocation;
         tileTexture.loadFromFile(tileLocation);
         tiles.setTexture(tileTexture);
-        while(!openfile.eof()) //dopóki ró¿ne od END OF FILE
+        while(!openfile.eof()) //dopoki rozne od END OF FILE
         {
             std::string str,value;
             std::getline(openfile,str);
@@ -61,6 +62,13 @@ void Tile::renderMap()
     Tile::loadMap("map1.txt"); //Za³¹dowanie mapy
     sf::RenderWindow window(sf::VideoMode(1200,800), "Kraina Czarow"); //Okno programu
 
+    //Menu
+    Menu menu(window.getSize().x, window.getSize().y);
+    int choose;
+    sf::Font font;
+    font.loadFromFile("Fonts/Caveat.ttf");
+    sf::Time second = sf::seconds(0.01f); //obsluguje czas
+
     //Postac
     sf::Texture txt;
     txt.loadFromFile("grafika/test_postac.gif");
@@ -70,14 +78,81 @@ void Tile::renderMap()
     player.scale(2,2);
     player.setPosition(50,50);
 
+    //Wprowadzenie
+    sf::Text WelcomeText1;
+    WelcomeText1.setFont(font);
+    WelcomeText1.setCharacterSize(30);
+    WelcomeText1.setFillColor(sf::Color::White);
+    WelcomeText1.setPosition(200, 100);
+    WelcomeText1.setString("Dawno dawno temu, byla sobie Alicja, ktorej przeznaczeniem bylo pokonac Czerwona Krolowa...");
+
+    sf::Text WelcomeText2;
+    WelcomeText2.setFont(font);
+    WelcomeText2.setCharacterSize(30);
+    WelcomeText2.setFillColor(sf::Color::White);
+    WelcomeText2.setPosition(400, 200);
+    WelcomeText2.setString("... jednak problemem bylo to, ze nie wiadomo gdzie jest, ow Alicja.");
+
+    sf::Text WelcomeText3;
+    WelcomeText3.setFont(font);
+    WelcomeText3.setCharacterSize(30);
+    WelcomeText3.setFillColor(sf::Color::White);
+    WelcomeText3.setPosition(500, 300);
+    WelcomeText3.setString("Znajdz ja i razem pokonajcie Krolowa.");
+
+
+    //Pasek na górze gry i informacje
+    sf::RectangleShape line(sf::Vector2f(1200, 30));
+    line.setPosition(0, 0);
+    line.setFillColor(sf::Color(0, 0, 0));
+
+
     sf::Clock dt; //Czas
+    sf::Clock clock;
 
     window.setFramerateLimit(120); //120 fps , klatki na sekunde
 
     //Petla gry
-    while(window.isOpen())
+    while (window.isOpen())
     {
-        Window::events_sfml(window);
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            Window::events_sfml(window);
+            switch (event.type)
+            {
+            case sf::Event::KeyReleased:
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Left:
+                    menu.MoveUp();
+                    break;
+
+                case sf::Keyboard::Right:
+                    menu.MoveDown();
+                    break;
+
+                case  sf::Keyboard::Return:
+                    switch (menu.GetPressedItem())
+                    {
+                    case 0:
+                        choose = 1;
+                        break;
+                    case 1:
+                        choose = 2;
+                        break;
+                    case 2:
+                        window.close();
+                        break;
+                    }
+                    break;
+                }
+                break;
+            case sf::Event::Closed:
+                window.close();
+                break;
+            }
+        }
 
         int keyleft=0, keyright=0, keyup=0, keydown=0;
 
@@ -108,21 +183,69 @@ void Tile::renderMap()
         if(keydown==1)
             Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
-        window.clear(sf::Color(50,255,100));
-        for(int i=0; i<mapa.size(); i++)
+        sf::Time czas = clock.getElapsedTime();
+
+
+        if (choose == 1) //gra
         {
-            for(int j=0; j<mapa[i].size(); j++)
+            sf::Time czas = clock.getElapsedTime();
+            if (czas.asSeconds() <= 5)
             {
-                if(mapa[i][j].x != -1 && mapa[i][j].y != -1)
-                {
-                    tiles.setPosition(j*50, i*50);
-                    tiles.setTextureRect(sf::IntRect(mapa[i][j].x*50, mapa[i][j].y*50, 50, 50));
-                    window.draw(tiles); //Narysuj kafelki
-                }
+                sf::Time czas = clock.getElapsedTime();
+                window.clear();
+                window.draw(WelcomeText1);
+                window.display();
+
             }
+            else if (czas.asSeconds()>5 && czas.asSeconds() <= 7)
+            {
+                window.clear();
+                window.draw(WelcomeText2);
+                window.display();
+            }
+            else if (czas.asSeconds() > 7 && czas.asSeconds() <= 10)
+            {
+                window.clear();
+                window.draw(WelcomeText3);
+                window.display();
+            }
+            else if (czas.asSeconds() >10)
+            {
+                window.clear(sf::Color(50,255,100));
+                for(int i=0; i<mapa.size(); i++)
+                {
+                    for(int j=0; j<mapa[i].size(); j++)
+                    {
+                        if(mapa[i][j].x != -1 && mapa[i][j].y != -1)
+                        {
+                            tiles.setPosition(j*50, i*50);
+                            tiles.setTextureRect(sf::IntRect(mapa[i][j].x*50, mapa[i][j].y*50, 50, 50));
+                            window.draw(tiles); //Narysuj kafelki
+                        }
+                    }
+                }
+                window.draw(player);
+                window.display();
+            }
+
+
         }
-        window.draw(player);
-        window.display();
+        else if (choose == 2) //informacje o grze
+        {
+            window.clear();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+            {
+                choose = 1;
+            }
+            window.display();
+        }
+        else //ekran startowy
+        {
+            window.clear();
+            menu.draw(window);
+            window.display();
+        }
     }
+
 }
 

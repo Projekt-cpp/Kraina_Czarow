@@ -430,25 +430,172 @@
 	"window.h"
 	"player.h"
 
-1639593892 source:c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\main.cpp
+1641490261 source:c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
+	<SFML/Audio.hpp>
+	<SFML/OpenGL.hpp>
+	<SFML/Audio/Music.hpp>
 	<iostream>
 	<sstream>
 	"player.h"
 	"window.h"
+	"tile.h"
+	"menu.h"
 
 1639591564 c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\player.h
 	<SFML/Graphics.hpp>
 
-1638226252 c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\window.h
+1641337738 c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\window.h
 	<SFML/Graphics.hpp>
 
-1639593865 source:c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\player.cpp
+1641337156 source:c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\player.cpp
 	"player.h"
 	"window.h"
+	"tile.h"
 
-1638226268 source:c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\window.cpp
+1641487759 source:c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\window.cpp
 	"window.h"
 	"player.h"
+	"tile.h"
+
+1641492626 source:c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\tile.cpp
+	"tile.h"
+	"window.h"
+	"player.h"
+	"menu.h"
+
+1641491830 c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\tile.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	<fstream>
+	<cctype>
+	<string>
+	<vector>
+	<sstream>
+
+1639584781 c:\sfml\include\sfml\audio.hpp
+	<SFML/System.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
+
+1639584782 c:\sfml\include\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<algorithm>
+
+1639584782 c:\sfml\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1639584782 c:\sfml\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1639584782 c:\sfml\include\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1639584783 c:\sfml\include\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1639584783 c:\sfml\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1639584782 c:\sfml\include\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1639584782 c:\sfml\include\sfml\audio\outputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<string>
+
+1639584782 c:\sfml\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1639584782 c:\sfml\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1639584782 c:\sfml\include\sfml\audio\soundbufferrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1639584783 c:\sfml\include\sfml\audio\soundrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<vector>
+	<string>
+
+1639584782 c:\sfml\include\sfml\audio\soundfilefactory.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+	<vector>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1639584782 c:\sfml\include\sfml\audio\soundfilefactory.inl
+
+1639584782 c:\sfml\include\sfml\audio\soundfilereader.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1639584782 c:\sfml\include\sfml\audio\soundfilewriter.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1639584781 c:\sfml\include\sfml\opengl.hpp
+	<SFML/Config.hpp>
+	<windows.h>
+	<GL/gl.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
+	<GL/gl.h>
+	<OpenGL/gl.h>
+	<OpenGLES/ES1/gl.h>
+	<OpenGLES/ES1/glext.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
+	<GLES2/gl2platform.h>
+	<GLES2/gl2ext.h>
+
+1641491117 c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\menu.h
+	"SFML/Graphics.hpp"
+
+1641491464 source:c:\users\wikto\onedrive\pulpit\kraina_czarow\kraina_czarow\menu.cpp
+	"Menu.h"
 
