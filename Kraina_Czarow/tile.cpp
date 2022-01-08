@@ -59,8 +59,11 @@ void Tile::loadMap(const char *filename)
 
 void Tile::renderMap()
 {
-    Tile::loadMap("map1.txt"); //Za³¹dowanie mapy
+    Tile::loadMap("map1.txt"); //Zaladowanie mapy
     sf::RenderWindow window(sf::VideoMode(1200,800), "Kraina Czarow"); //Okno programu
+
+    //Kamera
+    sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1200.0f,800.0f));
 
     //Menu
     Menu menu(window.getSize().x, window.getSize().y);
@@ -76,7 +79,7 @@ void Tile::renderMap()
     sf::IntRect rect(0,96,sprwidth,48); //Definicja prostokata, pierwszego sprite'a
     sf::Sprite player(txt,rect);
     player.scale(2,2);
-    player.setPosition(50,50);
+    player.setPosition(950,1350);
 
     //Wprowadzenie
     sf::Text WelcomeText1;
@@ -101,11 +104,17 @@ void Tile::renderMap()
     WelcomeText3.setString("Znajdz ja i razem pokonajcie Krolowa.");
 
 
-    //Pasek na górze gry i informacje
+    //Pasek na gorze gry i informacje
     sf::RectangleShape line(sf::Vector2f(1200, 30));
     line.setPosition(0, 0);
     line.setFillColor(sf::Color(0, 0, 0));
 
+    //Informacja
+    sf::Texture info;
+    info.loadFromFile("grafika/info.png");
+    sf::Sprite informacje;
+    informacje.setPosition(0,0);
+    informacje.setTexture(info);
 
     sf::Clock dt; //Czas
     sf::Clock clock;
@@ -183,11 +192,10 @@ void Tile::renderMap()
         if(keydown==1)
             Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
-        sf::Time czas = clock.getElapsedTime();
-
 
         if (choose == 1) //gra
         {
+            clock.restart();
             sf::Time czas = clock.getElapsedTime();
             if (czas.asSeconds() <= 5)
             {
@@ -211,7 +219,9 @@ void Tile::renderMap()
             }
             else if (czas.asSeconds() >10)
             {
-                window.clear(sf::Color(50,255,100));
+                view.setCenter(player.getPosition()); //ustawia kamere
+                window.clear(sf::Color(128,128,128));
+                window.setView(view);
                 for(int i=0; i<mapa.size(); i++)
                 {
                     for(int j=0; j<mapa[i].size(); j++)
@@ -233,6 +243,7 @@ void Tile::renderMap()
         else if (choose == 2) //informacje o grze
         {
             window.clear();
+            window.draw(informacje);
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
             {
                 choose = 1;
