@@ -1,4 +1,4 @@
-#include "tile.h"
+﻿#include "tile.h"
 #include "window.h"
 #include "player.h"
 #include "menu.h"
@@ -8,47 +8,59 @@ std::vector<sf::Vector2i> tempMap;
 sf::Texture tileTexture;
 sf::Sprite tiles;
 
-void Tile::loadMap(const char *filename)
+int checkolison(sf::Sprite& a, sf::Sprite& b)
+{
+    sf::FloatRect shape1 = a.getGlobalBounds();
+    sf::FloatRect shape2 = b.getGlobalBounds();
+    if(a.getPosition().x<b.getPosition().x+shape2.width)
+        if(a.getPosition().x+shape1.width>b.getPosition().x)
+            if(a.getPosition().y<b.getPosition().y+shape2.height)
+                if (a.getPosition().y + shape1.height > b.getPosition().y)
+                {
+                return 1;
+                }
+}
+void Tile::loadMap(const char* filename)
 {
     std::ifstream openfile(filename);
     tempMap.clear();
     mapa.clear();
 
-    if(openfile.is_open())
+    if (openfile.is_open())
     {
         std::string tileLocation;
-        openfile>>tileLocation;
+        openfile >> tileLocation;
         tileTexture.loadFromFile(tileLocation);
         tiles.setTexture(tileTexture);
-        while(!openfile.eof()) //dopoki rozne od END OF FILE
+        while (!openfile.eof()) //dopoki rozne od END OF FILE
         {
-            std::string str,value;
-            std::getline(openfile,str);
+            std::string str, value;
+            std::getline(openfile, str);
             std::stringstream stream(str);
 
-            while(std::getline(stream,value,' '))
+            while (std::getline(stream, value, ' '))
             {
-                if(value.length()>0)
+                if (value.length() > 0)
                 {
                     std::string xx = value.substr(0, value.find(','));
-                    std::string yy = value.substr(value.find(',')+1);
+                    std::string yy = value.substr(value.find(',') + 1);
 
-                    int x,y,i,j;
+                    int x, y, i, j;
 
-                    for(i=0; i<xx.length(); i++)
+                    for (i = 0; i < xx.length(); i++)
                     {
-                        if(!isdigit(xx[i]))
+                        if (!isdigit(xx[i]))
                             break;
                     }
-                    for(j=0; j<yy.length(); j++)
+                    for (j = 0; j < yy.length(); j++)
                     {
-                        if(!isdigit(yy[j]))
+                        if (!isdigit(yy[j]))
                             break;
                     }
-                    x=(i==xx.length())?atoi(xx.c_str()):-1;
-                    y=(j==yy.length())?atoi(yy.c_str()):-1;
+                    x = (i == xx.length()) ? atoi(xx.c_str()) : -1;
+                    y = (j == yy.length()) ? atoi(yy.c_str()) : -1;
 
-                    tempMap.push_back(sf::Vector2i(x,y));
+                    tempMap.push_back(sf::Vector2i(x, y));
                 }
             }
             mapa.push_back(tempMap);
@@ -59,11 +71,11 @@ void Tile::loadMap(const char *filename)
 
 void Tile::renderMap()
 {
-    Tile::loadMap("map1.txt"); //Zaladowanie mapy
-    sf::RenderWindow window(sf::VideoMode(1200,800), "Kraina Czarow"); //Okno programu
+    Tile::loadMap("map1.txt"); //Za³¹dowanie mapy
+    sf::RenderWindow window(sf::VideoMode(1200, 800), "Kraina Czarow"); //Okno programu
 
     //Kamera
-    sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1200.0f,800.0f));
+    sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1200.0f, 800.0f));
 
     //Menu
     Menu menu(window.getSize().x, window.getSize().y);
@@ -76,11 +88,20 @@ void Tile::renderMap()
     sf::Texture txt;
     txt.loadFromFile("grafika/test_postac.gif");
     const int sprwidth = 32;
-    sf::IntRect rect(0,96,sprwidth,48); //Definicja prostokata, pierwszego sprite'a
-    sf::Sprite player(txt,rect);
-    player.scale(2,2);
-    player.setPosition(950,1350);
+    sf::IntRect rect(0, 96, sprwidth, 48); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite player(txt, rect);
+    player.scale(2, 2);
+    player.setPosition(50, 50);
+    int playerHP = 30;
+    
 
+    //informacje 
+    sf::Texture info;
+    info.loadFromFile("grafika/info.png");
+    sf::Sprite informacje;
+    informacje.setPosition(0, 0);
+    informacje.setTexture(info);
+    
     //Wprowadzenie
     sf::Text WelcomeText1;
     WelcomeText1.setFont(font);
@@ -104,17 +125,15 @@ void Tile::renderMap()
     WelcomeText3.setString("Znajdz ja i razem pokonajcie Krolowa.");
 
 
-    //Pasek na gorze gry i informacje
-    sf::RectangleShape line(sf::Vector2f(1200, 30));
-    line.setPosition(0, 0);
-    line.setFillColor(sf::Color(0, 0, 0));
+    //karty mocy
+    sf::Texture cart;
+    cart.loadFromFile("grafika/test_postac.gif");
+    sf::IntRect kart(0, 96, 30, 48); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite carts(cart, kart);
+    carts.scale(2, 2);
+    carts.setPosition(500, 600);
+    
 
-    //Informacja
-    sf::Texture info;
-    info.loadFromFile("grafika/info.png");
-    sf::Sprite informacje;
-    informacje.setPosition(0,0);
-    informacje.setTexture(info);
 
     sf::Clock dt; //Czas
     sf::Clock clock;
@@ -163,39 +182,47 @@ void Tile::renderMap()
             }
         }
 
-        int keyleft=0, keyright=0, keyup=0, keydown=0;
+        int keyleft = 0, keyright = 0, keyup = 0, keydown = 0;
 
         //Stan klawiatury
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-            keyleft=1;
-        else keyleft=0;
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-            keyright=1;
-        else keyright=0;
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-            keyup=1;
-        else keyup=0;
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-            keydown=1;
-        else keydown=0;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            keyleft = 1;
+        else keyleft = 0;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            keyright = 1;
+        else keyright = 0;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            keyup = 1;
+        else keyup = 0;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            keydown = 1;
+        else keydown = 0;
 
         //Przesuniecie postaci + animacja
-        if(keyleft==1)
-            Player::player_move(player,dt,rect,sprwidth,-3,0,0,48);
+        if (keyleft == 1)
+            Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 48);
 
-        if(keyright==1)
-            Player::player_move(player,dt,rect,sprwidth,3,0,0,96);
+        if (keyright == 1)
+            Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 96);
 
-        if(keyup==1)
-            Player::player_move(player,dt,rect,sprwidth,0,-3,0,144);
+        if (keyup == 1)
+            Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 144);
 
-        if(keydown==1)
-            Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
+        if (keydown == 1)
+            Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
 
+        //sf::Time czas = clock.getElapsedTime();
 
+        //zbieranie kart mocy
+        if (checkolison(player, carts)==true) 
+        {
+            playerHP = 60;
+            std::cout << playerHP;
+        }
+        
         if (choose == 1) //gra
         {
-            clock.restart();
+            
             sf::Time czas = clock.getElapsedTime();
             if (czas.asSeconds() <= 5)
             {
@@ -203,9 +230,9 @@ void Tile::renderMap()
                 window.clear();
                 window.draw(WelcomeText1);
                 window.display();
-
+                //clock.restart();
             }
-            else if (czas.asSeconds()>5 && czas.asSeconds() <= 7)
+            else if (czas.asSeconds() > 5 && czas.asSeconds() <= 7)
             {
                 window.clear();
                 window.draw(WelcomeText2);
@@ -217,25 +244,33 @@ void Tile::renderMap()
                 window.draw(WelcomeText3);
                 window.display();
             }
-            else if (czas.asSeconds() >10)
+            else if (czas.asSeconds() > 10)
             {
                 view.setCenter(player.getPosition()); //ustawia kamere
-                window.clear(sf::Color(128,128,128));
+                window.clear(sf::Color(50, 255, 100));
                 window.setView(view);
-                for(int i=0; i<mapa.size(); i++)
+                for (int i = 0; i < mapa.size(); i++)
                 {
-                    for(int j=0; j<mapa[i].size(); j++)
+                    for (int j = 0; j < mapa[i].size(); j++)
                     {
-                        if(mapa[i][j].x != -1 && mapa[i][j].y != -1)
+                        if (mapa[i][j].x != -1 && mapa[i][j].y != -1)
                         {
-                            tiles.setPosition(j*50, i*50);
-                            tiles.setTextureRect(sf::IntRect(mapa[i][j].x*50, mapa[i][j].y*50, 50, 50));
+                            tiles.setPosition(j * 50, i * 50);
+                            tiles.setTextureRect(sf::IntRect(mapa[i][j].x * 50, mapa[i][j].y * 50, 50, 50));
                             window.draw(tiles); //Narysuj kafelki
+                            
                         }
                     }
                 }
+                window.draw(carts);
+                std::cout << playerHP << std::endl;
                 window.draw(player);
                 window.display();
+                if (playerHP < 0) 
+                {
+                    choose == 3;
+                }
+                
             }
 
 
@@ -244,11 +279,15 @@ void Tile::renderMap()
         {
             window.clear();
             window.draw(informacje);
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             {
                 choose = 1;
             }
             window.display();
+        }
+        else if (choose == 3) //koniec gry
+        {
+            window.close();
         }
         else //ekran startowy
         {
@@ -257,6 +296,4 @@ void Tile::renderMap()
             window.display();
         }
     }
-
 }
-
