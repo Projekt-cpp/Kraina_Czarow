@@ -51,8 +51,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="collision.cpp" />
+		<Unit filename="collision.h" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="map1.txt" />
+		<Unit filename="map2.txt" />
 		<Unit filename="menu.cpp" />
 		<Unit filename="menu.h" />
 		<Unit filename="player.cpp" />
@@ -60,6 +65,7 @@
 		<Unit filename="tile.cpp" />
 		<Unit filename="tile.h" />
 		<Unit filename="tiles.png" />
+		<Unit filename="tiles1.png" />
 		<Unit filename="window.cpp" />
 		<Unit filename="window.h" />
 		<Extensions>
