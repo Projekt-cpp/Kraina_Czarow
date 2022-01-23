@@ -5,9 +5,12 @@
 #include <SFML/Audio/Music.hpp>
 #include <iostream>
 #include <sstream>
+#include "game.h"
 #include "player.h"
 #include "window.h"
 #include "tile.h"
+#include "menu.h"
+#include "collision.h"
 
 
 int main()
@@ -19,7 +22,7 @@ int main()
         return -1; // blad
     music.play();
 
-    Tile::renderMap(); //Renderowanie gry
+    Game::renderMap(); //Renderowanie gry
 
     return 0;
 }

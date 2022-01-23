@@ -12,8 +12,7 @@
 class Tile
 {
 public:
-    static void loadMap(const char *filename);
-    static void renderMap();
+	static void draw(sf::RenderWindow& window);
 };
 
 

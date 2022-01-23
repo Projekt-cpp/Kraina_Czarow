@@ -6,7 +6,7 @@
 class Window
 {
 public:
-    static void events_sfml(sf::RenderWindow& window); //Obsluga zdarzen okna w SFML
+    static void events_sfml(sf::RenderWindow &window); //Obsluga zdarzen okna w SFML
 };
 
 
