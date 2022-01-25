@@ -21,6 +21,8 @@ int main()
     if (!music.openFromFile("Muzyka/Winds_Of_Stories.ogg"))
         return -1; // blad
     music.play();
+    music.setVolume(40.f);
+    music.setLoop(true);
 
     Game::renderMap(); //Renderowanie gry
 
