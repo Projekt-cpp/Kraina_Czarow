@@ -85,7 +85,7 @@ void Game::renderMap()
     txt12.loadFromFile("grafika/walka.png");
     sf::RectangleShape tlo12(sf::Vector2f(1200,800));
     tlo12.setTexture(&txt12);
-    tlo12.setPosition(-1200, 2400);
+    tlo12.setPosition(-2400, 1600);
 
     sf::Texture txt13;
     txt13.loadFromFile("grafika/lab13.png");
@@ -123,65 +123,16 @@ void Game::renderMap()
     sf::Sprite player1(txtA,rect1);
     player1.scale(2,2);
     player1.setPosition(1000,2015);
-    int playerHPa = playerHP;
+    int playerHP1 = playerHP;
 
-    //Pierwsze przeladowanie
-    sf::Text WelcomeText1;
-    WelcomeText1.setFont(font);
-    WelcomeText1.setCharacterSize(30);
-    WelcomeText1.setFillColor(sf::Color::White);
-    WelcomeText1.setPosition(200, 100);
-    WelcomeText1.setString("-W tym kierunku mieszka Kapelusznik.");
+    //Smok
+    sf::Texture txtS;
+    txtS.loadFromFile("grafika/smok.png");
+    sf::IntRect rectS(0,0,255,197); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite Zaberzwlok(txtS,rectS);
+    Zaberzwlok.scale(2,2);
+    Zaberzwlok.setPosition(-2300,1800);
 
-    sf::Text WelcomeText2;
-    WelcomeText2.setFont(font);
-    WelcomeText2.setCharacterSize(30);
-    WelcomeText2.setFillColor(sf::Color::White);
-    WelcomeText2.setPosition(400, 300);
-    WelcomeText2.setString("-Ale ja nie chcialabym miec do czynienia z wariatami.");
-
-    sf::Text WelcomeText3;
-    WelcomeText3.setFont(font);
-    WelcomeText3.setCharacterSize(30);
-    WelcomeText3.setFillColor(sf::Color::White);
-    WelcomeText3.setPosition(300, 500);
-    WelcomeText3.setString("-O, na to nie ma juz rady. \n Wszyscy mamy tutaj bzika. Ja mam bzika, ty masz bzika.");
-
-    //Drugie przeladowanie
-    sf::Text WelcomeText4;
-    WelcomeText4.setFont(font);
-    WelcomeText4.setCharacterSize(30);
-    WelcomeText4.setFillColor(sf::Color::White);
-    WelcomeText4.setPosition(200, 100);
-    WelcomeText4.setString("-Prosze, poczestuj sie winem.");
-
-    sf::Text WelcomeText5;
-    WelcomeText5.setFont(font);
-    WelcomeText5.setCharacterSize(30);
-    WelcomeText5.setFillColor(sf::Color::White);
-    WelcomeText5.setPosition(300, 300);
-    WelcomeText5.setString("-Nie widze tu zadnego wina.");
-
-    sf::Text WelcomeText6;
-    WelcomeText6.setFont(font);
-    WelcomeText6.setCharacterSize(30);
-    WelcomeText6.setFillColor(sf::Color::White);
-    WelcomeText6.setPosition(400, 500);
-    WelcomeText6.setString("-Bo go wcale tu nie ma.");
-
-    sf::Text WelcomeText7;
-    WelcomeText7.setFont(font);
-    WelcomeText7.setCharacterSize(30);
-    WelcomeText7.setFillColor(sf::Color::White);
-    WelcomeText7.setPosition(500, 700);
-    WelcomeText7.setString("-Wobec tego czestowanie mnie winem nie by³o z panskiej strony zbyt uprzejme.");
-
-    sf::Text WelcomeText8;
-    WelcomeText8.setFont(font);
-    WelcomeText8.setCharacterSize(30);
-    WelcomeText8.setFillColor(sf::Color::White);
-    WelcomeText8.setPosition(600, 800);
-    WelcomeText8.setString("-Przysiadanie sie tutaj bez zaproszenia rowniez nie by³o zbyt uprzejme z twojej strony.");
 
     //Potka
     sf::Texture cart;
@@ -190,6 +141,34 @@ void Game::renderMap()
     sf::Sprite carts(cart, kart);
     carts.scale(0.5, 0.5);
     carts.setPosition(500, 600);
+
+    //Napoj
+    sf::Texture drink;
+    drink.loadFromFile("grafika/napoj.gif");
+    sf::IntRect napoj(0, 0, 32, 32); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite drinks(drink, napoj);
+    drinks.scale(1.5, 1.5);
+    drinks.setPosition(-800, 1900);
+    sf::Texture drink1;
+    drink1.loadFromFile("grafika/napoj.gif");
+    sf::IntRect napoj1(0, 0, 32, 32); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite drinks1(drink1, napoj1);
+    drinks1.scale(1.5, 1.5);
+    drinks1.setPosition(-1000, 2200);
+
+    //Ciastko
+    sf::Texture cake;
+    cake.loadFromFile("grafika/ciastko.gif");
+    sf::IntRect ciastko(0, 0, 32, 32); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite cakes(cake, ciastko);
+    cakes.scale(1.5, 1.5);
+    cakes.setPosition(-500, 2100);
+    sf::Texture cake1;
+    cake1.loadFromFile("grafika/ciastko.gif");
+    sf::IntRect ciastko1(0, 0, 32, 32); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite cakes1(cake1, ciastko1);
+    cakes1.scale(1.5, 1.5);
+    cakes1.setPosition(-1000, 1700);
 
     //Pasek z informacjami
     sf::RectangleShape line(sf::Vector2f(1200, 30));
@@ -206,14 +185,16 @@ void Game::renderMap()
 
     //Przeladowanie ekranu
     sf::Texture load;
-    load.loadFromFile("grafika/load_ss.jpg");
+    load.loadFromFile("grafika/ladowanie.jpg");
 
     sf::Sprite background;
+    background.setPosition(20,0);
+    //background.setScale(0.9,0.9);
     background.setTexture(load);
 
 
     sf::Clock dt; //Czas
-    sf::Clock clock;
+    sf::Clock clock, clock1;
 
     window.setFramerateLimit(120); //120 fps , klatki na sekunde
 
@@ -241,9 +222,7 @@ void Game::renderMap()
                     switch (menu.GetPressedItem())
                     {
                     case 0:
-                        clock.restart();
                         choose = 1;
-                        //Tile::draw(window);
                         break;
                     case 1:
                         choose = 2;
@@ -277,18 +256,21 @@ void Game::renderMap()
             keydown=1;
         else keydown=0;
 
-          //Przesuniecie postaci + animacja
-          if(keyleft==1)
+        //Przesuniecie postaci + animacja
+        if(keyleft==1)
             Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-          else if(keyright==1)
+        else if(keyright==1)
             Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-          else if(keyup==1)
+        else if(keyup==1)
             Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-          else if(keydown==1)
+        else if(keydown==1)
             Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
+
+        //Przesuniecie Alicji w labiryncie + animacja
+        Player::move_alice(player1, player);
 
        //Zbieranie potek
         if (Collision::checkolison(player, carts)==true)
@@ -298,219 +280,196 @@ void Game::renderMap()
             carts.setColor(sf::Color::Transparent);
         }
 
+        //Wypicie napoju
+        if (Collision::checkolison(player, drinks)==true)
+        {
+            player.setScale(1,1);
+            drinks.setColor(sf::Color::Transparent);
+            drinks.setPosition(2500,2500);
+        }
+        if (Collision::checkolison(player, drinks1)==true)
+        {
+            player.setScale(1,1);
+            drinks1.setColor(sf::Color::Transparent);
+            drinks1.setPosition(2500,2500);
+        }
+
+        //Zjedzenie ciastka
+        if (Collision::checkolison(player, cakes)==true)
+        {
+            player.setScale(3,3);
+            cakes.setColor(sf::Color::Transparent);
+            cakes.setPosition(2500,2500);
+        }
+        if (Collision::checkolison(player, cakes1)==true)
+        {
+            player.setScale(3,3);
+            cakes1.setColor(sf::Color::Transparent);
+            cakes1.setPosition(2500,2500);
+        }
+
         if (choose == 1) //gra w labiryncie
         {
-            /*sf::Time czas = clock.getElapsedTime();
-            if (czas.asSeconds() <= 3.5)
+           // window.clear();
+            //window.draw(background);
+            //window.display();
+            /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
             {
-                window.clear();
-                window.draw(background);
-                window.draw(WelcomeText1);
-                window.display();
+                //czas=czas+30;
+            }
+            */
+            sf::Vector2<float> pos= player.getPosition();
+            sf::Vector2<float> scal= player.getScale();
+            window.clear();
+            //window.draw(rectangle); //pasek zycia
+            //std::cout<<"Pozycja x: "<<pos.x<<", pozycja y: "<<pos.y<<std::endl;
+            //std::cout<<scal.x<<std::endl;
 
-            }
-            else if (czas.asSeconds()>3.5 && czas.asSeconds() <= 7)
+            window.draw(tlo5);
+            if (pos.x<=0 && pos.y>=0 && pos.x>=-1200 && pos.y<=800)
             {
                 window.clear();
-                window.draw(background);
-                window.draw(WelcomeText2);
-                window.display();
+                sf::View view(sf::FloatRect(-1200,0, 1200,800));
+                window.setView(view);
+                window.draw(tlo3);
+                window.draw(player);
+                window.draw(carts);
             }
-            else if (czas.asSeconds() > 7 && czas.asSeconds() <= 11.5)
+            else if (pos.x>=0 && pos.y>=0 && pos.x<=1200 && pos.y<=800)
             {
                 window.clear();
-                window.draw(background);
-                window.draw(WelcomeText3);
-                window.display();
-            }
-            else if (czas.asSeconds() >11.5)
-            {*/
-                sf::Vector2<float> pos= player.getPosition();
-                window.clear();
-                //window.draw(rectangle); //pasek zycia
-
+                sf::View view(sf::FloatRect(0,0, 1200,800));
+                window.setView(view);
                 window.draw(tlo5);
-                if (pos.x<=0 && pos.y>=0 && pos.x>=-1200 && pos.y<=800)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(-1200,0, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo3);
-                    window.draw(player);
-                    window.draw(carts);
-                }
-                else if (pos.x>=0 && pos.y>=0 && pos.x<=1200 && pos.y<=800)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(0,0, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo5);
-                    window.draw(player);
-                }
-                else if (pos.x>=1200 && pos.y>=0 && pos.x<=2400 && pos.y<=800)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(1200,0, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo6);
-                    window.draw(player);
-                    window.draw(carts);
+                window.draw(player);
+            }
+            else if (pos.x>=1200 && pos.y>=0 && pos.x<=2400 && pos.y<=800)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(1200,0, 1200,800));
+                window.setView(view);
+                window.draw(tlo6);
+                window.draw(player);
+                window.draw(carts);
 
-                }
-                else if (pos.x<=0 && pos.y>=-800 && pos.x>=-1200 && pos.y<=0)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(-1200,-800, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo2);
-                    window.draw(player);
-                    window.draw(carts);
+            }
+            else if (pos.x<=0 && pos.y>=-800 && pos.x>=-1200 && pos.y<=0)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(-1200,-800, 1200,800));
+                window.setView(view);
+                window.draw(tlo2);
+                window.draw(player);
+                window.draw(carts);
 
-                }
-                else if (pos.x<=0 && pos.y>=-1600 && pos.x>=-1200 && pos.y<=-800)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(-1200,-1600, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo1);
-                    window.draw(player);
-                    window.draw(carts);
+            }
+            else if (pos.x<=0 && pos.y>=-1600 && pos.x>=-1200 && pos.y<=-800)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(-1200,-1600, 1200,800));
+                window.setView(view);
+                window.draw(tlo1);
+                window.draw(player);
+                window.draw(carts);
 
-                }
-                else if (pos.x<=0 && pos.y>=800 && pos.x>=-1200 && pos.y<=1600)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(-1200,800, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo7);
-                    window.draw(player);
-                    window.draw(carts);
+            }
+            else if (pos.x<=0 && pos.y>=800 && pos.x>=-1200 && pos.y<=1600)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(-1200,800, 1200,800));
+                window.setView(view);
+                window.draw(tlo7);
+                window.draw(player);
+                window.draw(carts);
 
-                }
-                else if (pos.x<=0 && pos.y>=1600 && pos.x>=-1200 && pos.y<=2400)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(-1200,1600, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo11); //szachownica
-                    window.draw(player);
-                }
-                else if (pos.x>=0&& pos.y>=1600 && pos.x<=1200 && pos.y<=2400)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(0,1600, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo9);
-                    window.draw(player);
-                    window.draw(player1);
-                    window.draw(carts);
+            }
+            else if (pos.x<=0 && pos.y>=1600 && pos.x>=-1200 && pos.y<=2400)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(-1200,1600, 1200,800));
+                window.setView(view);
+                window.draw(tlo11); //szachownica
+                window.draw(drinks);
+                window.draw(drinks1);
+                window.draw(cakes);
+                window.draw(cakes1);
+                window.draw(player);
+            }
+            else if (pos.x>=0&& pos.y>=1600 && pos.x<=1200 && pos.y<=2400)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(0,1600, 1200,800));
+                window.setView(view);
+                window.draw(tlo9);
+                window.draw(player);
+                window.draw(player1);
+                window.draw(carts);
 
-                }
-                else if (pos.x>=1200 && pos.y<=0 && pos.x<=2400 && pos.y>=-800)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(1200,-800, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo4);
-                    window.draw(player);
-                    window.draw(carts);
+            }
+            else if (pos.x>=1200 && pos.y<=0 && pos.x<=2400 && pos.y>=-800)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(1200,-800, 1200,800));
+                window.setView(view);
+                window.draw(tlo4);
+                window.draw(player);
+                window.draw(carts);
 
-                }
-                else if (pos.x>=1200 && pos.y>=800 && pos.x<=2400 && pos.y<=1600)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(1200,800, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo8);
-                    window.draw(player);
-                    window.draw(carts);
+            }
+            else if (pos.x>=1200 && pos.y>=800 && pos.x<=2400 && pos.y<=1600)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(1200,800, 1200,800));
+                window.setView(view);
+                window.draw(tlo8);
+                window.draw(player);
+                window.draw(carts);
 
-                }
-                else if (pos.x>=0 && pos.y<=0 && pos.x<=1200 && pos.y>=-800)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(0,-800, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo13);
-                    window.draw(player);
+            }
+            else if (pos.x>=0 && pos.y<=0 && pos.x<=1200 && pos.y>=-800)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(0,-800, 1200,800));
+                window.setView(view);
+                window.draw(tlo13);
+                window.draw(player);
 
-                }
-                else if (pos.x>=0 && pos.y>=800 && pos.x<=1200 && pos.y<=1600)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(0,800, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo14);
-                    window.draw(player);
-                    window.draw(carts);
+            }
+            else if (pos.x>=0 && pos.y>=800 && pos.x<=1200 && pos.y<=1600)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(0,800, 1200,800));
+                window.setView(view);
+                window.draw(tlo14);
+                window.draw(player);
+                window.draw(carts);
 
-                }
-                 else if (pos.x>=1200 && pos.y>=1600 && pos.x<=2400 && pos.y<=2400)
-                {
-                    window.clear();
-                    sf::View view(sf::FloatRect(1200,1600, 1200,800));
-                    window.setView(view);
-                    window.draw(tlo10); //podwieczorek
-                    window.draw(player);
-                    window.draw(carts);
+            }
+            else if (pos.x>=1200 && pos.y>=1600 && pos.x<=2400 && pos.y<=2400)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(1200,1600, 1200,800));
+                window.setView(view);
+                window.draw(tlo10); //podwieczorek
+                window.draw(player);
+                window.draw(carts);
 
-                }
+            }
+            else if (scal.x==3 && pos.x<=-1200 && pos.y>=1600 && pos.x>=-2400 && pos.y<=2400)
+            {
+                window.clear();
+                sf::View view(sf::FloatRect(-2400,1600, 1200,800));
+                window.setView(view);
+                window.draw(tlo12); //arena
+                window.draw(player);
+                window.draw(Zaberzwlok);
+            }
 
-
-                //std::cout << playerHP << std::endl;
-
-                window.display();
-                if (playerHP < 0)
-                {
-                    choose == 3;
-                }
-
-
-                std::cout<<pos.y<<"\n";
-                //std::cout<<pos.y<<"\n";
-              /* if ((pos.x)>2150)
-                    {
-                           // clock.restart();
-                            sf::Time czas = clock.getElapsedTime();
-                            clock.restart();
-                            if (czas.asSeconds() <= 2.5)
-                            {
-                                window.clear();
-                                window.draw(background);
-                                window.draw(WelcomeText4);
-                                window.display();
-
-                            }
-                            else if (czas.asSeconds()>2.5 && czas.asSeconds() <= 5)
-                            {
-                                window.clear();
-                                window.draw(background);
-                                window.draw(WelcomeText5);
-                                window.display();
-                            }
-                            else if (czas.asSeconds() > 5 && czas.asSeconds() <= 7.5)
-                            {
-                                window.clear();
-                                window.draw(background);
-                                window.draw(WelcomeText6);
-                                window.display();
-                            }
-                            else if (czas.asSeconds()>7.5 && czas.asSeconds() <= 11)
-                            {
-                                window.clear();
-                                window.draw(background);
-                                window.draw(WelcomeText7);
-                                window.display();
-                            }
-                            else if (czas.asSeconds() > 11 && czas.asSeconds() <= 14)
-                            {
-                                window.clear();
-                                window.draw(background);
-                                window.draw(WelcomeText8);
-                                window.display();
-                            }
-                    }*/
-            //}
+            window.display();
+            if (playerHP < 0)
+            {
+                choose == 3;
+            }
 
 
         }
