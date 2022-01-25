@@ -133,6 +133,13 @@ void Game::renderMap()
     Zaberzwlok.scale(2,2);
     Zaberzwlok.setPosition(-2300,1800);
 
+    //Smok
+    sf::Texture txtK;
+    txtK.loadFromFile("grafika/kapelusznik.gif");
+    sf::IntRect rectK(0,0,36,52); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite Kapelusznik(txtK,rectK);
+    Kapelusznik.scale(2,2);
+    Kapelusznik.setPosition(2012,1761);
 
     //Potka
     sf::Texture cart;
@@ -323,7 +330,6 @@ void Game::renderMap()
             window.clear();
             //window.draw(rectangle); //pasek zycia
             //std::cout<<"Pozycja x: "<<pos.x<<", pozycja y: "<<pos.y<<std::endl;
-            //std::cout<<scal.x<<std::endl;
 
             window.draw(tlo5);
             if (pos.x<=0 && pos.y>=0 && pos.x>=-1200 && pos.y<=800)
@@ -333,7 +339,6 @@ void Game::renderMap()
                 window.setView(view);
                 window.draw(tlo3);
                 window.draw(player);
-                window.draw(carts);
             }
             else if (pos.x>=0 && pos.y>=0 && pos.x<=1200 && pos.y<=800)
             {
@@ -350,7 +355,6 @@ void Game::renderMap()
                 window.setView(view);
                 window.draw(tlo6);
                 window.draw(player);
-                window.draw(carts);
 
             }
             else if (pos.x<=0 && pos.y>=-800 && pos.x>=-1200 && pos.y<=0)
@@ -360,7 +364,6 @@ void Game::renderMap()
                 window.setView(view);
                 window.draw(tlo2);
                 window.draw(player);
-                window.draw(carts);
 
             }
             else if (pos.x<=0 && pos.y>=-1600 && pos.x>=-1200 && pos.y<=-800)
@@ -370,7 +373,6 @@ void Game::renderMap()
                 window.setView(view);
                 window.draw(tlo1);
                 window.draw(player);
-                window.draw(carts);
 
             }
             else if (pos.x<=0 && pos.y>=800 && pos.x>=-1200 && pos.y<=1600)
@@ -380,7 +382,6 @@ void Game::renderMap()
                 window.setView(view);
                 window.draw(tlo7);
                 window.draw(player);
-                window.draw(carts);
 
             }
             else if (pos.x<=0 && pos.y>=1600 && pos.x>=-1200 && pos.y<=2400)
@@ -403,7 +404,6 @@ void Game::renderMap()
                 window.draw(tlo9);
                 window.draw(player);
                 window.draw(player1);
-                window.draw(carts);
 
             }
             else if (pos.x>=1200 && pos.y<=0 && pos.x<=2400 && pos.y>=-800)
@@ -413,7 +413,6 @@ void Game::renderMap()
                 window.setView(view);
                 window.draw(tlo4);
                 window.draw(player);
-                window.draw(carts);
 
             }
             else if (pos.x>=1200 && pos.y>=800 && pos.x<=2400 && pos.y<=1600)
@@ -423,7 +422,6 @@ void Game::renderMap()
                 window.setView(view);
                 window.draw(tlo8);
                 window.draw(player);
-                window.draw(carts);
 
             }
             else if (pos.x>=0 && pos.y<=0 && pos.x<=1200 && pos.y>=-800)
@@ -442,7 +440,6 @@ void Game::renderMap()
                 window.setView(view);
                 window.draw(tlo14);
                 window.draw(player);
-                window.draw(carts);
 
             }
             else if (pos.x>=1200 && pos.y>=1600 && pos.x<=2400 && pos.y<=2400)
@@ -452,7 +449,7 @@ void Game::renderMap()
                 window.setView(view);
                 window.draw(tlo10); //podwieczorek
                 window.draw(player);
-                window.draw(carts);
+                window.draw(Kapelusznik);
 
             }
             else if (scal.x==3 && pos.x<=-1200 && pos.y>=1600 && pos.x>=-2400 && pos.y<=2400)
