@@ -201,7 +201,7 @@ void Game::renderMap()
 
 
     sf::Clock dt; //Czas
-    sf::Clock clock, clock1;
+    sf::Clock clock;
 
     window.setFramerateLimit(120); //120 fps , klatki na sekunde
 
@@ -229,6 +229,7 @@ void Game::renderMap()
                     switch (menu.GetPressedItem())
                     {
                     case 0:
+                        clock.restart();
                         choose = 1;
                         break;
                     case 1:
@@ -317,157 +318,157 @@ void Game::renderMap()
 
         if (choose == 1) //gra w labiryncie
         {
-           // window.clear();
-            //window.draw(background);
-            //window.display();
-            /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+            sf::Time czas = clock.getElapsedTime();
+            if (czas.asSeconds() <= 5)
             {
-                //czas=czas+30;
+                window.clear();
+                window.draw(background);
+                window.display();
             }
-            */
-            sf::Vector2<float> pos= player.getPosition();
-            sf::Vector2<float> scal= player.getScale();
-            window.clear();
-            //window.draw(rectangle); //pasek zycia
-            //std::cout<<"Pozycja x: "<<pos.x<<", pozycja y: "<<pos.y<<std::endl;
+            else if (czas.asSeconds()>5)
+            {
+                sf::Vector2<float> pos= player.getPosition();
+                sf::Vector2<float> scal= player.getScale();
+                window.clear();
+                //std::cout<<"Pozycja x: "<<pos.x<<", pozycja y: "<<pos.y<<std::endl;
 
-            window.draw(tlo5);
-            if (pos.x<=0 && pos.y>=0 && pos.x>=-1200 && pos.y<=800)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(-1200,0, 1200,800));
-                window.setView(view);
-                window.draw(tlo3);
-                window.draw(player);
-            }
-            else if (pos.x>=0 && pos.y>=0 && pos.x<=1200 && pos.y<=800)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(0,0, 1200,800));
-                window.setView(view);
                 window.draw(tlo5);
-                window.draw(player);
-            }
-            else if (pos.x>=1200 && pos.y>=0 && pos.x<=2400 && pos.y<=800)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(1200,0, 1200,800));
-                window.setView(view);
-                window.draw(tlo6);
-                window.draw(player);
+                if (pos.x<=0 && pos.y>=0 && pos.x>=-1200 && pos.y<=800)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(-1200,0, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo3);
+                    window.draw(player);
+                }
+                else if (pos.x>=0 && pos.y>=0 && pos.x<=1200 && pos.y<=800)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(0,0, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo5);
+                    window.draw(player);
+                }
+                else if (pos.x>=1200 && pos.y>=0 && pos.x<=2400 && pos.y<=800)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(1200,0, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo6);
+                    window.draw(player);
 
-            }
-            else if (pos.x<=0 && pos.y>=-800 && pos.x>=-1200 && pos.y<=0)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(-1200,-800, 1200,800));
-                window.setView(view);
-                window.draw(tlo2);
-                window.draw(player);
+                }
+                else if (pos.x<=0 && pos.y>=-800 && pos.x>=-1200 && pos.y<=0)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(-1200,-800, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo2);
+                    window.draw(player);
 
-            }
-            else if (pos.x<=0 && pos.y>=-1600 && pos.x>=-1200 && pos.y<=-800)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(-1200,-1600, 1200,800));
-                window.setView(view);
-                window.draw(tlo1);
-                window.draw(player);
+                }
+                else if (pos.x<=0 && pos.y>=-1600 && pos.x>=-1200 && pos.y<=-800)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(-1200,-1600, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo1);
+                    window.draw(player);
 
-            }
-            else if (pos.x<=0 && pos.y>=800 && pos.x>=-1200 && pos.y<=1600)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(-1200,800, 1200,800));
-                window.setView(view);
-                window.draw(tlo7);
-                window.draw(player);
+                }
+                else if (pos.x<=0 && pos.y>=800 && pos.x>=-1200 && pos.y<=1600)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(-1200,800, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo7);
+                    window.draw(player);
 
-            }
-            else if (pos.x<=0 && pos.y>=1600 && pos.x>=-1200 && pos.y<=2400)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(-1200,1600, 1200,800));
-                window.setView(view);
-                window.draw(tlo11); //szachownica
-                window.draw(drinks);
-                window.draw(drinks1);
-                window.draw(cakes);
-                window.draw(cakes1);
-                window.draw(player);
-            }
-            else if (pos.x>=0&& pos.y>=1600 && pos.x<=1200 && pos.y<=2400)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(0,1600, 1200,800));
-                window.setView(view);
-                window.draw(tlo9);
-                window.draw(player);
-                window.draw(player1);
+                }
+                else if (pos.x<=0 && pos.y>=1600 && pos.x>=-1200 && pos.y<=2400)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(-1200,1600, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo11); //szachownica
+                    window.draw(drinks);
+                    window.draw(drinks1);
+                    window.draw(cakes);
+                    window.draw(cakes1);
+                    window.draw(player);
+                }
+                else if (pos.x>=0&& pos.y>=1600 && pos.x<=1200 && pos.y<=2400)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(0,1600, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo9);
+                    window.draw(player);
+                    window.draw(player1);
 
-            }
-            else if (pos.x>=1200 && pos.y<=0 && pos.x<=2400 && pos.y>=-800)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(1200,-800, 1200,800));
-                window.setView(view);
-                window.draw(tlo4);
-                window.draw(player);
+                }
+                else if (pos.x>=1200 && pos.y<=0 && pos.x<=2400 && pos.y>=-800)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(1200,-800, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo4);
+                    window.draw(player);
 
-            }
-            else if (pos.x>=1200 && pos.y>=800 && pos.x<=2400 && pos.y<=1600)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(1200,800, 1200,800));
-                window.setView(view);
-                window.draw(tlo8);
-                window.draw(player);
+                }
+                else if (pos.x>=1200 && pos.y>=800 && pos.x<=2400 && pos.y<=1600)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(1200,800, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo8);
+                    window.draw(player);
 
-            }
-            else if (pos.x>=0 && pos.y<=0 && pos.x<=1200 && pos.y>=-800)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(0,-800, 1200,800));
-                window.setView(view);
-                window.draw(tlo13);
-                window.draw(player);
+                }
+                else if (pos.x>=0 && pos.y<=0 && pos.x<=1200 && pos.y>=-800)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(0,-800, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo13);
+                    window.draw(player);
 
-            }
-            else if (pos.x>=0 && pos.y>=800 && pos.x<=1200 && pos.y<=1600)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(0,800, 1200,800));
-                window.setView(view);
-                window.draw(tlo14);
-                window.draw(player);
+                }
+                else if (pos.x>=0 && pos.y>=800 && pos.x<=1200 && pos.y<=1600)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(0,800, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo14);
+                    window.draw(player);
 
-            }
-            else if (pos.x>=1200 && pos.y>=1600 && pos.x<=2400 && pos.y<=2400)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(1200,1600, 1200,800));
-                window.setView(view);
-                window.draw(tlo10); //podwieczorek
-                window.draw(player);
-                window.draw(Kapelusznik);
+                }
+                else if (pos.x>=1200 && pos.y>=1600 && pos.x<=2400 && pos.y<=2400)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(1200,1600, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo10); //podwieczorek
+                    window.draw(player);
+                    window.draw(Kapelusznik);
 
-            }
-            else if (scal.x==3 && pos.x<=-1200 && pos.y>=1600 && pos.x>=-2400 && pos.y<=2400)
-            {
-                window.clear();
-                sf::View view(sf::FloatRect(-2400,1600, 1200,800));
-                window.setView(view);
-                window.draw(tlo12); //arena
-                window.draw(player);
-                window.draw(Zaberzwlok);
-            }
+                }
+                else if (scal.x==3 && pos.x<=-1200 && pos.y>=1600 && pos.x>=-2400 && pos.y<=2400)
+                {
+                    window.clear();
+                    sf::View view(sf::FloatRect(-2400,1600, 1200,800));
+                    window.setView(view);
+                    window.draw(tlo12); //arena
+                    window.draw(player);
+                    window.draw(Zaberzwlok);
+                }
 
-            window.display();
-            if (playerHP < 0)
-            {
-                choose == 3;
+                window.display();
+                if (playerHP < 0)
+                {
+                    choose == 3;
+                }
             }
-
 
         }
         else if (choose == 2) //informacje o grze
