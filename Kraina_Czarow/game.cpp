@@ -123,7 +123,15 @@ void Game::renderMap()
     sf::Sprite player1(txtA,rect1);
     player1.scale(2,2);
     player1.setPosition(1000,2015);
-    int playerHP1 = playerHP;
+
+    sf::Texture txtAw; //Alicja na arene
+    txtAw.loadFromFile("grafika/woj_alicja.gif");
+    const int sprwidth1w = 32;
+    sf::IntRect rect1w(0,96,sprwidth1w,48); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite player1w(txtAw,rect1w);
+    player1w.scale(3,3);
+    player1w.setPosition(-1270,2016);
+    int playerHP1w = playerHP;
 
     //Smok
     sf::Texture txtS;
@@ -133,7 +141,7 @@ void Game::renderMap()
     Zaberzwlok.scale(2,2);
     Zaberzwlok.setPosition(-2300,1800);
 
-    //Smok
+    //Kapelusznik
     sf::Texture txtK;
     txtK.loadFromFile("grafika/kapelusznik.gif");
     sf::IntRect rectK(0,0,36,52); //Definicja prostokata, pierwszego sprite'a
@@ -264,19 +272,6 @@ void Game::renderMap()
             keydown=1;
         else keydown=0;
 
-        //Przesuniecie postaci + animacja
-        if(keyleft==1)
-            Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
-
-        else if(keyright==1)
-            Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
-
-        else if(keyup==1)
-            Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
-
-        else if(keydown==1)
-            Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
-
         //Przesuniecie Alicji w labiryncie + animacja
         Player::move_alice(player1, player);
 
@@ -292,12 +287,14 @@ void Game::renderMap()
         if (Collision::checkolison(player, drinks)==true)
         {
             player.setScale(1,1);
+            player1.setScale(1,1);
             drinks.setColor(sf::Color::Transparent);
             drinks.setPosition(2500,2500);
         }
         if (Collision::checkolison(player, drinks1)==true)
         {
             player.setScale(1,1);
+            player1.setScale(1,1);
             drinks1.setColor(sf::Color::Transparent);
             drinks1.setPosition(2500,2500);
         }
@@ -306,12 +303,14 @@ void Game::renderMap()
         if (Collision::checkolison(player, cakes)==true)
         {
             player.setScale(3,3);
+            player1.setScale(3,3);
             cakes.setColor(sf::Color::Transparent);
             cakes.setPosition(2500,2500);
         }
         if (Collision::checkolison(player, cakes1)==true)
         {
             player.setScale(3,3);
+            player1.setScale(3,3);
             cakes1.setColor(sf::Color::Transparent);
             cakes1.setPosition(2500,2500);
         }
@@ -319,18 +318,17 @@ void Game::renderMap()
         if (choose == 1) //gra w labiryncie
         {
             sf::Time czas = clock.getElapsedTime();
-            if (czas.asSeconds() <= 5)
+            if (czas.asSeconds() <= 2)
             {
                 window.clear();
                 window.draw(background);
                 window.display();
             }
-            else if (czas.asSeconds()>5)
+            else if (czas.asSeconds()>2)
             {
                 sf::Vector2<float> pos= player.getPosition();
                 sf::Vector2<float> scal= player.getScale();
                 window.clear();
-                //std::cout<<"Pozycja x: "<<pos.x<<", pozycja y: "<<pos.y<<std::endl;
 
                 window.draw(tlo5);
                 if (pos.x<=0 && pos.y>=0 && pos.x>=-1200 && pos.y<=800)
@@ -340,6 +338,19 @@ void Game::renderMap()
                     window.setView(view);
                     window.draw(tlo3);
                     window.draw(player);
+
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
                 }
                 else if (pos.x>=0 && pos.y>=0 && pos.x<=1200 && pos.y<=800)
                 {
@@ -348,6 +359,19 @@ void Game::renderMap()
                     window.setView(view);
                     window.draw(tlo5);
                     window.draw(player);
+
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
                 }
                 else if (pos.x>=1200 && pos.y>=0 && pos.x<=2400 && pos.y<=800)
                 {
@@ -356,6 +380,19 @@ void Game::renderMap()
                     window.setView(view);
                     window.draw(tlo6);
                     window.draw(player);
+
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x<=0 && pos.y>=-800 && pos.x>=-1200 && pos.y<=0)
@@ -366,6 +403,19 @@ void Game::renderMap()
                     window.draw(tlo2);
                     window.draw(player);
 
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
+
                 }
                 else if (pos.x<=0 && pos.y>=-1600 && pos.x>=-1200 && pos.y<=-800)
                 {
@@ -375,6 +425,19 @@ void Game::renderMap()
                     window.draw(tlo1);
                     window.draw(player);
 
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
+
                 }
                 else if (pos.x<=0 && pos.y>=800 && pos.x>=-1200 && pos.y<=1600)
                 {
@@ -383,6 +446,19 @@ void Game::renderMap()
                     window.setView(view);
                     window.draw(tlo7);
                     window.draw(player);
+
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x<=0 && pos.y>=1600 && pos.x>=-1200 && pos.y<=2400)
@@ -396,6 +472,21 @@ void Game::renderMap()
                     window.draw(cakes);
                     window.draw(cakes1);
                     window.draw(player);
+                    window.draw(player1);
+
+                    //Przesuniecie postaci + animacja
+                   if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
+
                 }
                 else if (pos.x>=0&& pos.y>=1600 && pos.x<=1200 && pos.y<=2400)
                 {
@@ -406,6 +497,19 @@ void Game::renderMap()
                     window.draw(player);
                     window.draw(player1);
 
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
+
                 }
                 else if (pos.x>=1200 && pos.y<=0 && pos.x<=2400 && pos.y>=-800)
                 {
@@ -414,6 +518,19 @@ void Game::renderMap()
                     window.setView(view);
                     window.draw(tlo4);
                     window.draw(player);
+
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x>=1200 && pos.y>=800 && pos.x<=2400 && pos.y<=1600)
@@ -424,6 +541,19 @@ void Game::renderMap()
                     window.draw(tlo8);
                     window.draw(player);
 
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
+
                 }
                 else if (pos.x>=0 && pos.y<=0 && pos.x<=1200 && pos.y>=-800)
                 {
@@ -433,6 +563,19 @@ void Game::renderMap()
                     window.draw(tlo13);
                     window.draw(player);
 
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
+
                 }
                 else if (pos.x>=0 && pos.y>=800 && pos.x<=1200 && pos.y<=1600)
                 {
@@ -441,6 +584,19 @@ void Game::renderMap()
                     window.setView(view);
                     window.draw(tlo14);
                     window.draw(player);
+
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x>=1200 && pos.y>=1600 && pos.x<=2400 && pos.y<=2400)
@@ -452,6 +608,19 @@ void Game::renderMap()
                     window.draw(player);
                     window.draw(Kapelusznik);
 
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
+
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
+
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
+
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
+
                 }
                 else if (scal.x==3 && pos.x<=-1200 && pos.y>=1600 && pos.x>=-2400 && pos.y<=2400)
                 {
@@ -459,8 +628,21 @@ void Game::renderMap()
                     sf::View view(sf::FloatRect(-2400,1600, 1200,800));
                     window.setView(view);
                     window.draw(tlo12); //arena
-                    window.draw(player);
+                    window.draw(player1w);
                     window.draw(Zaberzwlok);
+
+                    //Przesuniecie postaci + animacja
+                    if(keyleft==1)
+                        Player::player_move(player1w,dt,rect1w,sprwidth1w,-3,0,0,48);
+
+                    else if(keyright==1)
+                        Player::player_move(player1w,dt,rect1w,sprwidth1w,3,0,0,96);
+
+                    else if(keyup==1)
+                        Player::player_move(player1w,dt,rect1w,sprwidth1w,0,-3,0,144);
+
+                    else if(keydown==1)
+                        Player::player_move(player1w,dt,rect1w,sprwidth1w,0,3,0,0);
                 }
 
                 window.display();
