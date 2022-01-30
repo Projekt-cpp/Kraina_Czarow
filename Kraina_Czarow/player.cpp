@@ -3,6 +3,7 @@
 #include "tile.h"
 #include "collision.h"
 #include "game.h"
+#include <cmath>
 
 int keyleft=0, keyright=0, keyup=0, keydown=0;
 
@@ -30,23 +31,27 @@ void Player::player_move(sf::Sprite &player, sf::Clock &dt, sf::IntRect &rect, i
         }
 }
 
-void Player::move_alice(sf::Sprite &player1, sf::Sprite &player, float v, float y)
-{/*
-    const int rinteraction = 1200/2; //W/2
-    //Enemy spoczywa, kiedy nie ma blisko Player'a
-    sf::Vector2<float> pos = player1.getPosition();
-    sf::Vector2<float> pos2 = player.getPosition();
-    sf::Vector2<float> i = pos-pos2;
-    float d = length(i);
-    if(d > rinteraction)
-        return;
-    else if(d) //Jesli Player blisko, wtedy Alicja porusza sie w jego kierunku
+float length(sf::Vector2f &a)
+{
+    return hypot(a.x, a.y);
+}
+
+void Player::move_alice(sf::Sprite &player1, sf::Sprite &player)
+{
+    const int R=450;
+    //spoczywaj, gdy nie ma blisko królika
+    sf::Vector2<float> pos1=player1.getPosition();
+    sf::Vector2<float> pos=player.getPosition();
+    sf::Vector2<float>i=pos1-pos;
+    float d=length(i);
+    if(d > R)
     {
-       sf::Vector2<float> k;
-       k=-i/d; //k - wektor kierunku
-       //Przesuwamy Enemy
-       k.x=k.x*v;
-       k.y=k.y*y;
-       player1.move(k);
-    }*/
+        return;
+    }
+    else if(d) //jesli królik blisko to idŸ w jego kierunku
+    {
+        sf::Vector2<float> k;
+        k=-i/d; //wektor kierunku, od Alicji do królika
+        player1.move(k); //przesuniêcie Alicji
+    }
 }
