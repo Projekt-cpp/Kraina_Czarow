@@ -8,6 +8,7 @@
 #include <conio.h>
 #include <cmath>
 #include <sstream>
+#include <windows.h>
 
 template <typename T>
 std::string to_stream(const T& obj)
@@ -440,6 +441,13 @@ void Game::renderMap()
 
         //Ruch wroga (kart)
         Player::move_alice(warrior, player);
+
+        //Atak smoka
+        if (Collision::checkolison(player, Kapelusznik) == true)
+        {
+            Sleep(150);
+            HP-=1;
+        }
 
         //Zbieranie potek
         if (Collision::checkolison(player, potion) == true)
