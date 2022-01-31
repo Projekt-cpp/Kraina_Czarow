@@ -196,7 +196,6 @@ void Game::renderMap()
     warrior.scale(2, 2);
     warrior.setPosition(-700, -400);
 
-
     //Postac
     sf::Texture txt;
     txt.loadFromFile("grafika/krolik.gif");
@@ -289,6 +288,24 @@ void Game::renderMap()
     background.setPosition(20,0);
     //background.setScale(0.9,0.9);
     background.setTexture(load);
+
+    //Zwyciestwo w grze
+    sf::Texture load1;
+    load1.loadFromFile("grafika/win.jpg");
+
+    sf::Sprite background1;
+    background1.setPosition(20,0);
+    //background1.setScale(0.9,0.9);
+    background1.setTexture(load1);
+
+    //Porazka w grze
+    sf::Texture load2;
+    load2.loadFromFile("grafika/loose.jpg");
+
+    sf::Sprite background2;
+    background2.setPosition(20,0);
+    //background2.setScale(0.9,0.9);
+    background2.setTexture(load2);
 
     //Text z hp
     int HP=50;
@@ -862,8 +879,12 @@ void Game::renderMap()
                     else if(keydown==1)
                         Player::player_move(player1w,dt,rect1w,sprwidth1w,0,3,0,0);
                 }
-                if (smokHP == 0)
+                else if (smokHP <= 0)
                 {
+                    /*window.clear();
+                    window.draw(background1);
+                    window.display();*/
+                    //choose == 4;
                     std::cout << "koniec gry" << std::endl;
                 }
                 //std::cout << playerHP << std::endl;
@@ -893,6 +914,12 @@ void Game::renderMap()
         {
             window.close();
         }
+        /*else if (choose == 4) //informacje o grze
+        {
+            window.clear();
+            window.draw(background1);
+            window.display();
+        }*/
         else //ekran startowy
         {
             window.clear();
