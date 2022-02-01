@@ -1,4 +1,4 @@
-ï»¿#include <string>
+#include <string>
 #include "game.h"
 #include "tile.h"
 #include "window.h"
@@ -17,7 +17,9 @@ std::string to_stream(const T& obj)
     ss << obj;
     return ss.str();
 }
+
 int choose;
+
 std::vector<std::vector<sf::Vector2i> > mapa;
 std::vector<std::vector<int> > colMapa;
 sf::Texture tileTexture;
@@ -25,19 +27,21 @@ sf::Sprite tiles;
 
 void Game::renderMap()
 {
-    sf::RenderWindow window(sf::VideoMode(1200, 800), "Kraina Czarow"); //Okno programu
+    sf::RenderWindow window(sf::VideoMode(1200,800), "Kraina Czarow"); //Okno programu
+
     int smokHP = 1000;
     int w1HP = 30;
     int w2HP = 30;
     int w3HP = 30;
     int w4HP = 30;
     int w5HP = 30;
+
     //Przegrana
     sf::Texture load2;
     load2.loadFromFile("grafika/loose.jpg");
     sf::Sprite background2;
-    background2.setPosition(-120, 395); //0,800
-    background2.setScale(2.4, 2.4);
+    background2.setPosition(-120,395); //0,800
+    background2.setScale(2.4,2.4);
     background2.setTexture(load2);
 
     //Wygrana
@@ -45,114 +49,115 @@ void Game::renderMap()
     load1.loadFromFile("grafika/win.jpg");
     sf::Sprite background1;
     background1.setPosition(-2520, 1130); //-2400, 1600
-    background1.setScale(2.4, 2.4);
+    background1.setScale(2.4,2.4);
     background1.setTexture(load1);
-    //Mapy
+
+     //Mapy
     sf::Texture txt1;
     txt1.loadFromFile("grafika/lab1.png");
-    sf::RectangleShape tlo1(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo1(sf::Vector2f(1200,800));
     tlo1.setTexture(&txt1);
     tlo1.setPosition(-1200, -1600);
 
     sf::Texture txt2;
     txt2.loadFromFile("grafika/lab2.png");
-    sf::RectangleShape tlo2(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo2(sf::Vector2f(1200,800));
     tlo2.setTexture(&txt2);
     tlo2.setPosition(-1200, -800);
 
     sf::Texture txt3;
     txt3.loadFromFile("grafika/lab3.png");
-    sf::RectangleShape tlo3(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo3(sf::Vector2f(1200,800));
     tlo3.setTexture(&txt3);
     tlo3.setPosition(-1200, 0);
 
     sf::Texture txt4;
     txt4.loadFromFile("grafika/lab4.png");
-    sf::RectangleShape tlo4(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo4(sf::Vector2f(1200,800));
     tlo4.setTexture(&txt4);
     tlo4.setPosition(1200, -800);
 
     sf::Texture txt5;
     txt5.loadFromFile("grafika/lab5.png");
-    sf::RectangleShape tlo5(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo5(sf::Vector2f(1200,800));
     tlo5.setTexture(&txt5);
-    tlo5.setPosition(0, 0);
+    tlo5.setPosition(0,0);
 
     sf::Texture txt6;
     txt6.loadFromFile("grafika/lab6.png");
-    sf::RectangleShape tlo6(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo6(sf::Vector2f(1200,800));
     tlo6.setTexture(&txt6);
     tlo6.setPosition(1200, 0);
 
     sf::Texture txt7;
     txt7.loadFromFile("grafika/lab7.png");
-    sf::RectangleShape tlo7(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo7(sf::Vector2f(1200,800));
     tlo7.setTexture(&txt7);
     tlo7.setPosition(-1200, 800);
 
     sf::Texture txt8;
     txt8.loadFromFile("grafika/lab8.png");
-    sf::RectangleShape tlo8(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo8(sf::Vector2f(1200,800));
     tlo8.setTexture(&txt8);
     tlo8.setPosition(1200, 800);
 
     sf::Texture txt9;
     txt9.loadFromFile("grafika/lab9.png");
-    sf::RectangleShape tlo9(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo9(sf::Vector2f(1200,800));
     tlo9.setTexture(&txt9);
     tlo9.setPosition(0, 1600);
 
     sf::Texture txt10;
     txt10.loadFromFile("grafika/podwieczorek.png");
-    sf::RectangleShape tlo10(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo10(sf::Vector2f(1200,800));
     tlo10.setTexture(&txt10);
     tlo10.setPosition(1200, 1600);
 
     sf::Texture txt11;
     txt11.loadFromFile("grafika/szachownica.png");
-    sf::RectangleShape tlo11(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo11(sf::Vector2f(1200,800));
     tlo11.setTexture(&txt11);
     tlo11.setPosition(-1200, 1600);
 
     sf::Texture txt12;
     txt12.loadFromFile("grafika/walka.png");
-    sf::RectangleShape tlo12(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo12(sf::Vector2f(1200,800));
     tlo12.setTexture(&txt12);
     tlo12.setPosition(-2400, 1600);
 
     sf::Texture txt13;
     txt13.loadFromFile("grafika/lab13.png");
-    sf::RectangleShape tlo13(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo13(sf::Vector2f(1200,800));
     tlo13.setTexture(&txt13);
-    tlo13.setPosition(0, -800);
+    tlo13.setPosition(0,-800);
 
     sf::Texture txt14;
     txt14.loadFromFile("grafika/lab14.png");
-    sf::RectangleShape tlo14(sf::Vector2f(1200, 800));
+    sf::RectangleShape tlo14(sf::Vector2f(1200,800));
     tlo14.setTexture(&txt14);
-    tlo14.setPosition(0, 800);
+    tlo14.setPosition(0,800);
 
     //Pociski
     sf::Texture fire;
     fire.loadFromFile("grafika/fireball.png");
-    sf::IntRect firee(0, 0, 300, 300);
+    sf::IntRect firee(0, 0, 200, 200);
     sf::Sprite fireball(fire, firee);
-    sf::Vector2f v(5, 1);
+    sf::Vector2f v(1.5,1.5);
     sf::Vector2f gravity(0, 1);
     const int W = 1200;
     const int H = 800;
     int radius = 50.f;
     float x = W / 2 - radius;
     float y = H / 2 - radius;
-    // sf::CircleShape fireball(radius * 0.5);
+   // sf::CircleShape fireball(radius * 0.5);
     fireball.setPosition(-2100, 2000);
     fireball.scale(1, 1);
 
     sf::Texture fire1;
     fire1.loadFromFile("grafika/fireball.png");
-    sf::IntRect firee1(0, 0, 300, 300);
+    sf::IntRect firee1(0, 0, 200, 200);
     sf::Sprite fireball1(fire1, firee1);
-    sf::Vector2f v1(7, 1);
+    sf::Vector2f v1(2.5,2.5);
     sf::Vector2f gravity1(0, 1);
     const int W1 = 1500;
     const int H1 = 1000;
@@ -201,7 +206,7 @@ void Game::renderMap()
 
     //Menu
     Menu menu(window.getSize().x, window.getSize().y);
-    
+    int choose;
     sf::Font font;
     font.loadFromFile("Fonts/Caveat.ttf");
     sf::Time second = sf::seconds(0.01f); //obsluguje czas
@@ -243,48 +248,46 @@ void Game::renderMap()
     warrior5.scale(2, 2);
     warrior5.setPosition(750, 1000);
 
-    //Postac
+    //Postacie
     sf::Texture txt;
     txt.loadFromFile("grafika/krolik.gif");
     const int sprwidth = 32;
-    sf::IntRect rect(0, 0, sprwidth, 32); //Definicja prostokata, pierwszego sprite'a
-    sf::Sprite player(txt, rect);
-    player.scale(2, 2);
-    player.setPosition(587, 360);
-    int playerHP = 30;
+    sf::IntRect rect(0,0,sprwidth,32); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite player(txt,rect);
+    player.scale(2,2);
+    player.setPosition(587,360);
 
     sf::Texture txtA;
     txtA.loadFromFile("grafika/lab_alicja.gif");
     const int sprwidth1 = 32;
-    sf::IntRect rect1(0, 0, sprwidth1, 48); //Definicja prostokata, pierwszego sprite'a
-    sf::Sprite player1(txtA, rect1);
-    player1.scale(2, 2);
-    player1.setPosition(1000, 2015);
+    sf::IntRect rect1(0,0,sprwidth1,48); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite player1(txtA,rect1);
+    player1.scale(2,2);
+    player1.setPosition(1000,2015);
 
     sf::Texture txtAw; //Alicja na arene
     txtAw.loadFromFile("grafika/woj_alicja.gif");
     const int sprwidth1w = 32;
-    sf::IntRect rect1w(0, 96, sprwidth1w, 48); //Definicja prostokata, pierwszego sprite'a
-    sf::Sprite player1w(txtAw, rect1w);
-    player1w.scale(3, 3);
-    player1w.setPosition(-1270, 2016);
-    int playerHP1w = playerHP;
+    sf::IntRect rect1w(0,96,sprwidth1w,48); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite player1w(txtAw,rect1w);
+    player1w.scale(3,3);
+    player1w.setPosition(-1270,2016);
 
     //Smok
     sf::Texture txtS;
     txtS.loadFromFile("grafika/smok.png");
-    sf::IntRect rectS(0, 0, 255, 197); //Definicja prostokata, pierwszego sprite'a
-    sf::Sprite Zaberzwlok(txtS, rectS);
-    Zaberzwlok.scale(2, 2);
-    Zaberzwlok.setPosition(-2300, 1800);
+    sf::IntRect rectS(0,0,255,197); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite Zaberzwlok(txtS,rectS);
+    Zaberzwlok.scale(2,2);
+    Zaberzwlok.setPosition(-2300,1800);
 
     //Kapelusznik
     sf::Texture txtK;
     txtK.loadFromFile("grafika/kapelusznik.gif");
-    sf::IntRect rectK(0, 0, 36, 52); //Definicja prostokata, pierwszego sprite'a
-    sf::Sprite Kapelusznik(txtK, rectK);
-    Kapelusznik.scale(2, 2);
-    Kapelusznik.setPosition(2012, 1761);
+    sf::IntRect rectK(0,0,36,52); //Definicja prostokata, pierwszego sprite'a
+    sf::Sprite Kapelusznik(txtK,rectK);
+    Kapelusznik.scale(2,2);
+    Kapelusznik.setPosition(2012,1761);
 
     //Napoj
     sf::Texture drink;
@@ -323,21 +326,19 @@ void Game::renderMap()
     sf::Texture info;
     info.loadFromFile("grafika/instrukcja.png");
     sf::Sprite informacje;
-    informacje.setPosition(20, 0);
-    informacje.setScale(0.9, 0.9);
+    informacje.setPosition(20,0);
+    informacje.setScale(0.9,0.9);
     informacje.setTexture(info);
 
     //Przeladowanie ekranu
     sf::Texture load;
     load.loadFromFile("grafika/ladowanie.jpg");
-
     sf::Sprite background;
-    background.setPosition(20, 0);
-    //background.setScale(0.9,0.9);
+    background.setPosition(20,0);
     background.setTexture(load);
 
     //Text z hp
-    int HP = 50;
+    int HP=50;
     int HPMax = 50;
     sf::Text hpText;
     hpText.setFont(font);
@@ -345,7 +346,7 @@ void Game::renderMap()
     hpText.setFillColor(sf::Color::Red);
     hpText.setString(to_stream(HP));
 
-    //Text z hpsmoka
+    //Text z hp smoka
     int HPs = 50;
     int HPMaxs = 50;
     sf::Text hpTexts;
@@ -358,9 +359,9 @@ void Game::renderMap()
     sf::Text Text;
     Text.setFont(font);
     Text.setCharacterSize(32);
-    Text.setFillColor(sf::Color::Black);
-    Text.setString("Biegnij szukac Alicji!");
-    Text.setPosition(2012, 1700);
+    Text.setFillColor(sf::Color::White);
+    Text.setString("Chwarny Dzien! Prowadz Alicje!");
+    Text.setPosition(1950, 1700);
 
     sf::Clock dt; //Czas
     sf::Clock clock;
@@ -387,7 +388,7 @@ void Game::renderMap()
                     menu.MoveDown();
                     break;
 
-                case  sf::Keyboard::Return:
+                 case  sf::Keyboard::Return:
                     switch (menu.GetPressedItem())
                     {
                     case 0:
@@ -436,7 +437,7 @@ void Game::renderMap()
         v1.y = v1.x + gravity1.y;
         sf::FloatRect circle1 = fireball1.getGlobalBounds();
         sf::Vector2f p1 = fireball1.getPosition();
-        if (p1.x > -1000)
+        if (p1.x> -1000)
         {
             v1.x *= -1;
         }
@@ -444,7 +445,7 @@ void Game::renderMap()
         {
             v1.x *= -1;
         }
-        if (p1.y > -2100)
+        if (p1.y  > -2100)
         {
             v1.y *= -1;
         }
@@ -453,22 +454,23 @@ void Game::renderMap()
             v1.y *= -1;
         }
 
-        int keyleft = 0, keyright = 0, keyup = 0, keydown = 0;
+        int keyleft=0, keyright=0, keyup=0, keydown=0;
 
         //Stan klawiatury
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-            keyleft = 1;
-        else keyleft = 0;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-            keyright = 1;
-        else keyright = 0;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-            keyup = 1;
-        else keyup = 0;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-            keydown = 1;
-        else keydown = 0;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            keyleft=1;
+        else keyleft=0;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            keyright=1;
+        else keyright=0;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            keyup=1;
+        else keyup=0;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            keydown=1;
+        else keydown=0;
 
+        //hpText - HP królika ; hpTexts - HP smoka
         hpText.setPosition(player.getPosition().x, player.getPosition().y - hpText.getGlobalBounds().height);
         hpTexts.setPosition(-2000, 1750);
 
@@ -476,45 +478,46 @@ void Game::renderMap()
         Player::move_alice(player1, player);
 
         //Ruch wroga (kart)
-        Player::move_alice(warrior, player);
-        Player::move_alice(warrior2, player);
-        Player::move_alice(warrior3, player);
-        Player::move_alice(warrior4, player);
-        Player::move_alice(warrior5, player);
+        Player::move_enemies(warrior, player);
+        Player::move_enemies(warrior2, player);
+        Player::move_enemies(warrior3, player);
+        Player::move_enemies(warrior4, player);
+        Player::move_enemies(warrior5, player);
 
         //Atak smoka
-        
         if (Collision::checkolison(player, Zaberzwlok) == true)
         {
             Sleep(150);
-            HP -= 1;
+            HP-=1;
         }
-        //Taka kart
-        if (Collision::checkolison(player, warrior) == true)
+
+        //Atak kart
+         if (Collision::checkolison(player, warrior) == true)
         {
             Sleep(300);
-            HP -= 1;
+            HP-=1;
         }
-        if (Collision::checkolison(player, warrior2) == true)
+          if (Collision::checkolison(player, warrior2) == true)
         {
             Sleep(300);
-            HP -= 1;
+            HP-=1;
         }
-        if (Collision::checkolison(player, warrior3) == true)
+          if (Collision::checkolison(player, warrior3) == true)
         {
             Sleep(300);
-            HP -= 1;
+            HP-=1;
         }
-        if (Collision::checkolison(player, warrior4) == true)
+          if (Collision::checkolison(player, warrior4) == true)
         {
             Sleep(300);
-            HP -= 1;
+            HP-=1;
         }
-        if (Collision::checkolison(player, warrior5) == true)
+          if (Collision::checkolison(player, warrior5) == true)
         {
             Sleep(300);
-            HP -= 1;
+            HP-=1;
         }
+
         //Zbieranie potek
         if (Collision::checkolison(player, potion) == true)
         {
@@ -554,37 +557,36 @@ void Game::renderMap()
         hpText.setString(to_stream(HP));
 
         //Wypicie napoju
-        if (Collision::checkolison(player, drinks) == true)
+        if (Collision::checkolison(player, drinks)==true)
         {
-            player.setScale(1, 1);
-            player1.setScale(1, 1);
+            player.setScale(1,1);
+            player1.setScale(1,1);
             drinks.setColor(sf::Color::Transparent);
-            drinks.setPosition(2500, 2500);
+            drinks.setPosition(2500,2500);
         }
-        if (Collision::checkolison(player, drinks1) == true)
+        if (Collision::checkolison(player, drinks1)==true)
         {
-            player.setScale(1, 1);
-            player1.setScale(1, 1);
+            player.setScale(1,1);
+            player1.setScale(1,1);
             drinks1.setColor(sf::Color::Transparent);
-            drinks1.setPosition(2500, 2500);
+            drinks1.setPosition(2500,2500);
         }
 
         //Zjedzenie ciastka
-        if (Collision::checkolison(player, cakes) == true)
+        if (Collision::checkolison(player, cakes)==true)
         {
-            player.setScale(3, 3);
-            player1.setScale(3, 3);
+            player.setScale(3,3);
+            player1.setScale(3,3);
             cakes.setColor(sf::Color::Transparent);
-            cakes.setPosition(2500, 2500);
+            cakes.setPosition(2500,2500);
         }
-        if (Collision::checkolison(player, cakes1) == true)
+        if (Collision::checkolison(player, cakes1)==true)
         {
-            player.setScale(3, 3);
-            player1.setScale(3, 3);
+            player.setScale(3,3);
+            player1.setScale(3,3);
             cakes1.setColor(sf::Color::Transparent);
-            cakes1.setPosition(2500, 2500);
+            cakes1.setPosition(2500,2500);
         }
-
 
         if (choose == 1) //gra w labiryncie
         {
@@ -595,10 +597,10 @@ void Game::renderMap()
                 window.draw(background);
                 window.display();
             }
-            else if (czas.asSeconds() > 2)
+            else if (czas.asSeconds()>2)
             {
-                sf::Vector2<float> pos = player.getPosition();
-                sf::Vector2<float> scal = player.getScale();
+                sf::Vector2<float> pos= player.getPosition();
+                sf::Vector2<float> scal= player.getScale();
                 window.clear();
 
                 window.draw(tlo5);
@@ -612,17 +614,17 @@ void Game::renderMap()
                     window.draw(player);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x >= 0 && pos.y >= 0 && pos.x <= 1200 && pos.y <= 800)
@@ -635,17 +637,17 @@ void Game::renderMap()
                     window.draw(player);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x >= 1200 && pos.y >= 0 && pos.x <= 2400 && pos.y <= 800)
@@ -665,17 +667,17 @@ void Game::renderMap()
                     window.draw(warrior2);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                     //Zabicie przeciwnika
                     if (w2HP <= 0)
@@ -707,17 +709,17 @@ void Game::renderMap()
                     window.draw(warrior);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x <= 0 && pos.y >= -1600 && pos.x >= -1200 && pos.y <= -800)
@@ -730,17 +732,17 @@ void Game::renderMap()
                     window.draw(player);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x <= 0 && pos.y >= 800 && pos.x >= -1200 && pos.y <= 1600)
@@ -766,17 +768,17 @@ void Game::renderMap()
                     window.draw(warrior4);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x <= 0 && pos.y >= 1600 && pos.x >= -1200 && pos.y <= 2400)
@@ -794,17 +796,17 @@ void Game::renderMap()
                     window.draw(player1);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x >= 0 && pos.y >= 1600 && pos.x <= 1200 && pos.y <= 2400)
@@ -818,17 +820,17 @@ void Game::renderMap()
                     window.draw(player1);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x >= 1200 && pos.y <= 0 && pos.x <= 2400 && pos.y >= -800)
@@ -841,17 +843,17 @@ void Game::renderMap()
                     window.draw(player);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x >= 1200 && pos.y >= 800 && pos.x <= 2400 && pos.y <= 1600)
@@ -876,17 +878,17 @@ void Game::renderMap()
                     window.draw(warrior3);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x >= 0 && pos.y <= 0 && pos.x <= 1200 && pos.y >= -800)
@@ -900,17 +902,17 @@ void Game::renderMap()
                     window.draw(player);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x >= 0 && pos.y >= 800 && pos.x <= 1200 && pos.y <= 1600)
@@ -921,11 +923,9 @@ void Game::renderMap()
 
                     }
 
-                    std::cout << w5HP << std::endl;
                     //Zabicie przeciwnika
                     if (w5HP <= 0)
                     {
-                        std::cout << w5HP << std::endl;
                         warrior5.setPosition(5000, 5000);
                     }
                     window.clear();
@@ -938,17 +938,17 @@ void Game::renderMap()
                     window.draw(warrior5);
 
                     //Przesuniecie postaci + animacja
-                    if (keyleft == 1)
-                        Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
+                    if(keyleft==1)
+                        Player::player_move(player,dt,rect,sprwidth,-3,0,0,32);
 
-                    else if (keyright == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 3, 0, 0, 64);
+                    else if(keyright==1)
+                        Player::player_move(player,dt,rect,sprwidth,3,0,0,64);
 
-                    else if (keyup == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, -3, 0, 96);
+                    else if(keyup==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,-3,0,96);
 
-                    else if (keydown == 1)
-                        Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
+                    else if(keydown==1)
+                        Player::player_move(player,dt,rect,sprwidth,0,3,0,0);
 
                 }
                 else if (pos.x >= 1200 && pos.y >= 1600 && pos.x <= 2400 && pos.y <= 2400)
@@ -964,6 +964,7 @@ void Game::renderMap()
                     {
                         window.draw(Text);
                     }
+
                     if (keyleft == 1)
                         Player::player_move(player, dt, rect, sprwidth, -3, 0, 0, 32);
 
@@ -976,19 +977,25 @@ void Game::renderMap()
                     else if (keydown == 1)
                         Player::player_move(player, dt, rect, sprwidth, 0, 3, 0, 0);
 
+
                 }
                 else if (scal.x == 3 && pos.x <= -1200 && pos.y >= 1600 && pos.x >= -2400 && pos.y <= 2400)
                 {
-                hpText.setPosition(player1w.getPosition().x, player1w.getPosition().y - hpText.getGlobalBounds().height);
+                    hpText.setPosition(player1w.getPosition().x, player1w.getPosition().y - hpText.getGlobalBounds().height);
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
                     {
-                        smokHP -= 8;
+                        smokHP -= 1;
 
                     }
                     if (Collision::checkolison(player1w, fireball) == true)
                     {
-                        Sleep(50);
-                        HP -= 1;;
+                        Sleep(250);
+                        HP -= 0.1;
+                    }
+                    if (Collision::checkolison(player1w, fireball1) == true)
+                    {
+                        Sleep(250);
+                        HP -= 0.15;
                     }
                     hpTexts.setString(to_stream(smokHP));
                     hpText.setString(to_stream(HP));
@@ -1066,4 +1073,6 @@ void Game::renderMap()
     }
 
 }
+
+
 
