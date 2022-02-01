@@ -16,3 +16,4 @@ int Collision::checkolison(sf::Sprite& a, sf::Sprite& b)
                 return 1;
                 }
 }
+

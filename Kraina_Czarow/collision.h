@@ -12,8 +12,7 @@
 class Collision
 {
 public:
-    static int checkolison(sf::Sprite& a, sf::Sprite& b); //zbiera potki
-    static int colission(sf::Sprite& a); //kolizje z mapki
+    static int checkolison(sf::Sprite& a, sf::Sprite& b); //zbiera potki i atak
 };
 
 
